@@ -1,6 +1,6 @@
-const EventEmitter = require('events');
+const {Store} = require('express-session');
 
-module.exports = class SessionStore extends EventEmitter {
+module.exports = class SessionStore extends Store {
     constructor(SessionModel) {
         super();
         this.SessionModel = SessionModel;
