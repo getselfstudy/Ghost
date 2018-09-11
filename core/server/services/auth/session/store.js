@@ -8,7 +8,7 @@ module.exports = class SessionStore extends Store {
 
     destroy(sid, callback) {
         this.SessionModel.forge({id: sid})
-            .destroy()
+            .destroy({require: false})
             .then(() => {
                 callback(null);
             }).catch(callback);

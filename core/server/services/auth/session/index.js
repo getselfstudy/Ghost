@@ -22,7 +22,7 @@ const createSession = function createSession(req, res, next) {
 };
 
 const destroySession = function destroySession(req, res, next) {
-    res.session.destroy((err) => {
+    req.session.destroy((err) => {
         if (err) {
             return next(new InternalServerError());
         }
