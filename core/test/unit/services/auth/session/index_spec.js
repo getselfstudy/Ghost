@@ -18,7 +18,8 @@ describe('Session Service', function () {
             session: {
                 destroy() {}
             },
-            body: {}
+            body: {},
+            get() {}
         };
     };
     const fakeRes = function fakeRes() {
