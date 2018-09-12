@@ -60,6 +60,7 @@ const getSession = session({
         maxAge: 184 * 7 * 24 * 60 * 60 * 1000, // number of days in second half of year
         httpOnly: true,
         path: '/ghost',
+        sameSite: 'lax',
         secure: /^https:/.test(config.get('url'))
     }
 });
