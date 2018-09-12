@@ -114,7 +114,7 @@ describe('Session Service', function () {
                     done();
                 });
 
-            sessionService.destroySession(req, res)
+            sessionService.destroySession(req, res);
         });
     });
     describe('getUser', function () {
