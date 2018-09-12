@@ -59,6 +59,7 @@ const getSession = session({
     cookie: {
         maxAge: 184 * 7 * 24 * 60 * 60 * 1000, // number of days in second half of year
         httpOnly: true,
+        path: '/ghost',
         secure: /^https:/.test(config.get('url'))
     }
 });
