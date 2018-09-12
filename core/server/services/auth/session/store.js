@@ -35,8 +35,7 @@ module.exports = class SessionStore extends Store {
             .fetch({require: true})
             .then((model) => {
                 return model.set('session_data', sessionData).save();
-            })
-            .catch(() => {
+            }, () => {
                 return this.SessionModel.forge({
                     id: sid
                 }).save({
