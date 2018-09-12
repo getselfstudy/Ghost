@@ -172,6 +172,9 @@ module.exports = function apiRoutes() {
     apiRouter.get('/authentication/setup', api.http(api.authentication.isSetup));
 
     apiRouter.post('/session', auth.session.createSession);
+    apiRouter.get('/session', auth.session.ensureUser, function (req, res) {
+        return res.json(req.user);
+    });
     apiRouter.del('/session', auth.session.destroySession);
 
     apiRouter.post('/authentication/token',
