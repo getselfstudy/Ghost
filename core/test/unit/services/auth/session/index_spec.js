@@ -1,4 +1,6 @@
 const sessionService = require('../../../../../server/services/auth/session'),
+    SessionStore = require('../../../../../server/services/auth/session/store'),
+    config = require('../../../../../server/config'),
     models = require('../../../../../server/models'),
     {BadRequestError, UnauthorizedError, InternalServerError} = require('../../../../../server/lib/common/errors'),
     sinon = require('sinon'),
@@ -216,6 +218,123 @@ describe('Session Service', function () {
                 should.equal(err instanceof UnauthorizedError, true);
                 done();
             });
+        });
+    });
+
+    describe('getSession', function () {
+        let expressSessionStub;
+        let expressSessionStubReturnValue;
+        let mockedSessionService;
+        beforeEach(function () {
+            expressSessionStubReturnValue = {};
+            expressSessionStub = sandbox.stub()
+                .returns(expressSessionStubReturnValue);
+
+            delete require.cache[require.resolve('../../../../../server/services/auth/session')];
+            require.cache[require.resolve('express-session')].exports = expressSessionStub;
+            mockedSessionService = require('../../../../../server/services/auth/session');
+        });
+        after(function () {
+            delete require.cache[require.resolve('../../../../../server/services/auth/session')];
+            delete require.cache[require.resolve('express-session')];
+        });
+        it('is an "instance" of express-session', function () {
+            should.equal(mockedSessionService.getSession, expressSessionStubReturnValue);
+        });
+
+        it('uses an instance of SessionStore', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.store instanceof SessionStore, true);
+        });
+
+        it('uses the session-secret config', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.secret, config.get('session-secret'));
+        });
+
+        it('sets resave to false', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.resave, false);
+        });
+
+        it('sets saveUninitialized to false', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.saveUninitialized, false);
+        });
+
+        it('sets the cookies maxAge to 184 days', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.cookie.maxAge, 184 * 24 * 60 * 60 * 1000);
+        });
+
+        it('sets the cookies httpOnly to true', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.cookie.httpOnly, true);
+        });
+
+        it('sets the cookies path to /ghost', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.cookie.path, '/ghost');
+        });
+
+        it('sets the cookies sameSite to "lax"', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+            should.equal(options.cookie.sameSite, 'lax');
+        });
+
+        it('sets the cookies secure true if url config is https', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+        });
+
+        it('sets the cookies secure false if url config is http', function () {
+            const options = expressSessionStub.getCall(0).args[0];
+        });
+    });
+
+    describe('CSRF protection', function () {
+        it('calls next if the session is uninitialized', function (done) {
+            const req = fakeReq();
+            const res = fakeRes();
+
+            sessionService.cookieCsrfProtection(req, res, function next(err) {
+                should.not.exist(err);
+                done();
+            });
+        });
+
+        it('calls next if req origin matches the session origin', function (done) {
+            const req = fakeReq();
+            const res = fakeRes();
+            sandbox.stub(req, 'get')
+                .withArgs('origin').returns('http://host.tld');
+            req.session.origin = 'http://host.tld';
+
+            sessionService.cookieCsrfProtection(req, res, function next(err) {
+                should.not.exist(err);
+                done();
+            });
+        });
+
+        it('calls next with BadRequestError if the origin of req does not match the session', function (done) {
+            const req = fakeReq();
+            const res = fakeRes();
+            sandbox.stub(req, 'get')
+                .withArgs('origin').returns('http://host.tld');
+            req.session.origin = 'http://different-host.tld';
+
+            sessionService.cookieCsrfProtection(req, res, function next(err) {
+                should.equal(err instanceof BadRequestError, true);
+                done();
+            });
+        });
+    });
+
+    describe('safeGetSession', function () {
+        it('is an array of getSession and cookieCsrfProtection', function () {
+            should.deepEqual(sessionService.safeGetSession, [
+                sessionService.getSession,
+                sessionService.cookieCsrfProtection
+            ]);
         });
     });
 });
