@@ -12,9 +12,11 @@ describe('Session Service', function () {
         models.init();
         sandbox = sinon.sandbox.create();
     });
+
     afterEach(function () {
         sandbox.restore();
     });
+
     const fakeReq = function fakeReq() {
         return {
             session: {
@@ -24,11 +26,13 @@ describe('Session Service', function () {
             get() {}
         };
     };
+
     const fakeRes = function fakeRes() {
         return {
             sendStatus() {}
         };
     };
+
     describe('createSession', function () {
         it('calls next with a BadRequestError if there is no body', function (done) {
             const req = fakeReq();
@@ -38,6 +42,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('calls next with a BadRequestError if there is no Origin or Refferer', function (done) {
             const req = fakeReq();
             sandbox.stub(req, 'get')
@@ -49,6 +54,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('checks the username and password from the body', function (done) {
             const req = fakeReq();
             req.body.username = 'AzureDiamond';
@@ -67,6 +73,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('calls next with an UnauthorizedError if the check fails', function (done) {
             const req = fakeReq();
             const checkStub = sandbox.stub(models.User, 'check')
@@ -79,6 +86,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('sets req.session.user_id and calls sendStatus with 201 if the check succeeds', function (done) {
             const req = fakeReq();
             const res = fakeRes();
@@ -97,6 +105,7 @@ describe('Session Service', function () {
             sessionService.createSession(req, res);
         });
     });
+
     describe('destroySession', function () {
         it('calls req.session.destroy', function () {
             const req = fakeReq();
@@ -138,6 +147,7 @@ describe('Session Service', function () {
             sessionService.destroySession(req, res);
         });
     });
+
     describe('getUser', function () {
         it('sets req.user to null and calls next if there is no session', function (done) {
             const req = fakeReq();
@@ -150,6 +160,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('sets req.user to null and calls next if there is no session', function (done) {
             const req = fakeReq();
             const res = fakeRes();
@@ -159,6 +170,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('calls User.findOne with id set to req.session.user_id', function (done) {
             const req = fakeReq();
             const res = fakeRes();
@@ -171,6 +183,7 @@ describe('Session Service', function () {
             req.session.user_id = 23;
             sessionService.getUser(req, res);
         });
+
         it('calls next with UnauthorizedError if the user is not found', function (done) {
             const req = fakeReq();
             const res = fakeRes();
@@ -183,6 +196,7 @@ describe('Session Service', function () {
                 done();
             });
         });
+
         it('calls next after settign req.user to the found user', function (done) {
             const req = fakeReq();
             const res = fakeRes();
@@ -197,6 +211,7 @@ describe('Session Service', function () {
             });
         });
     });
+
     describe('ensureUser', function () {
         it('calls next with no error if req.user.id exists', function (done) {
             const req = fakeReq();
