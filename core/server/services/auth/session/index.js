@@ -82,7 +82,7 @@ const getSession = session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 184 * 7 * 24 * 60 * 60 * 1000, // number of days in second half of year
+        maxAge: 184 * 24 * 60 * 60 * 1000, // number of days in second half of year
         httpOnly: true,
         path: '/ghost',
         sameSite: 'lax',
