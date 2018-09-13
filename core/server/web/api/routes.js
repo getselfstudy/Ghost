@@ -30,7 +30,7 @@ module.exports = function apiRoutes() {
     // ## CORS pre-flight check
     apiRouter.options('*', cors);
 
-    apiRouter.use(auth.session.getSession);
+    apiRouter.use(auth.session.safeGetSession);
     apiRouter.use(auth.session.getUser);
 
     // ## Configuration

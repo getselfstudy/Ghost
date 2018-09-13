@@ -103,7 +103,9 @@ const cookieCsrfProtection = function cookieCsrfProtection(req, res, next) {
     return next();
 };
 
-module.exports.getSession = [getSession, cookieCsrfProtection];
+module.exports.getSession = getSession;
+module.exports.cookieCsrfProtection = cookieCsrfProtection;
+module.exports.safeGetSession = [getSession, cookieCsrfProtection];
 module.exports.createSession = createSession;
 module.exports.destroySession = destroySession;
 module.exports.getUser = getUser;
