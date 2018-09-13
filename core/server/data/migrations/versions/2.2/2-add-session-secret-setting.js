@@ -8,10 +8,10 @@ module.exports.up = () => {
     models.Settings.findOne({key: 'session-secret'})
         .then((model) => {
             if (model) {
-                common.logger.warn(createdMessage);
+                common.logging.warn(createdMessage);
                 return;
             }
-            common.logger.info(createdMessage);
+            common.logging.info(createdMessage);
             return models.Settings.forge({
                 key: 'session-secret',
                 value: crypto.randomBytes(32).toString('hex')
@@ -23,10 +23,10 @@ module.exports.down = () => {
     models.Settings.findOne({key: 'session-secret'})
         .then((model) => {
             if (!model) {
-                common.logger.warn(deletedMessage);
+                common.logging.warn(deletedMessage);
                 return;
             }
-            common.logger.info(deletedMessage);
+            common.logging.info(deletedMessage);
             return model.destroy();
         });
 };
