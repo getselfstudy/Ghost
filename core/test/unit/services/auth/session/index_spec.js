@@ -36,10 +36,24 @@ describe('Session Service', function () {
                 done();
             });
         });
+        it('calls next with a BadRequestError if there is no Origin or Refferer', function (done) {
+            const req = fakeReq();
+            sandbox.stub(req, 'get')
+                .withArgs('origin').returns('')
+                .withArgs('referrer').returns('');
+
+            sessionService.createSession(req, fakeRes(), function next(err) {
+                should.equal(err instanceof BadRequestError, true);
+                done();
+            });
+        });
         it('checks the username and password from the body', function (done) {
             const req = fakeReq();
             req.body.username = 'AzureDiamond';
             req.body.password = 'hunter2';
+
+            sandbox.stub(req, 'get')
+                .withArgs('origin').returns('http://host.tld');
 
             const checkStub = sandbox.stub(models.User, 'check')
                 .resolves();
@@ -55,6 +69,8 @@ describe('Session Service', function () {
             const req = fakeReq();
             const checkStub = sandbox.stub(models.User, 'check')
                 .rejects();
+            sandbox.stub(req, 'get')
+                .withArgs('origin').returns('http://host.tld');
 
             sessionService.createSession(req, fakeRes(), function next(err) {
                 should.equal(err instanceof UnauthorizedError, true);
@@ -66,6 +82,8 @@ describe('Session Service', function () {
             const res = fakeRes();
             const checkStub = sandbox.stub(models.User, 'check')
                 .resolves(models.User.forge({id: 23}));
+            sandbox.stub(req, 'get')
+                .withArgs('origin').returns('http://host.tld');
 
             const sendStatusStub = sandbox.stub(res, 'sendStatus')
                 .callsFake(function (statusCode) {
