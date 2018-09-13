@@ -81,6 +81,5 @@
     },
     "imageOptimization": {
         "resize": true
-    },
-    "session-secret": "neverusethis"
+    }
 }

@@ -1,5 +1,6 @@
 const {URL} = require('url'),
     config = require('../../../config'),
+    settingsCache = require('../../settings/cache'),
     {User} = require('../../../models/user'),
     {Session} = require('../../../models/session'),
     session = require('express-session'),
@@ -78,7 +79,7 @@ const ensureUser = function ensureUser(req, res, next) {
 
 const getSession = session({
     store: new SessionStore(Session),
-    secret: config.get('session-secret'),
+    secret: settingsCache.get('session-secret'),
     resave: false,
     saveUninitialized: false,
     cookie: {
