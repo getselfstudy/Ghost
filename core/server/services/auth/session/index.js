@@ -41,6 +41,8 @@ const createSession = function createSession(req, res, next) {
     }).then((user) => {
         req.session.user_id = user.id;
         req.session.origin = origin;
+        req.session.user_agent = req.get('user-agent');
+        req.session.ip = req.ip;
         res.sendStatus(201);
     }).catch((err) => {
         next(new UnauthorizedError(err.message));
