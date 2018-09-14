@@ -76,3 +76,5 @@ CHANGELOG.md
 
 # Coverage reports
 coverage.html
+
+.env*
