@@ -173,7 +173,7 @@ module.exports = function apiRoutes() {
 
     apiRouter.post('/session', auth.session.createSession);
     apiRouter.get('/session', auth.session.ensureUser, function (req, res) {
-        return res.json(req.user);
+        return res.json(Object.assign({}, req.user.toJSON(), req.session));
     });
     apiRouter.del('/session', auth.session.destroySession);
 
