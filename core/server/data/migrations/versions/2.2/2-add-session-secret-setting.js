@@ -5,7 +5,7 @@ const crypto = require('crypto'),
     deletedMessage = 'Deleted Settings Key `session-secret`.';
 
 module.exports.up = () => {
-    models.Settings.findOne({key: 'session-secret'})
+    return models.Settings.findOne({key: 'session-secret'})
         .then((model) => {
             if (model) {
                 common.logging.warn(createdMessage);
@@ -20,7 +20,7 @@ module.exports.up = () => {
 };
 
 module.exports.down = () => {
-    models.Settings.findOne({key: 'session-secret'})
+    return models.Settings.findOne({key: 'session-secret'})
         .then((model) => {
             if (!model) {
                 common.logging.warn(deletedMessage);
