@@ -1,0 +1,3 @@
+#!/bin/bash
+export NPM_TOKEN=$(sed -n -e 's#//registry.npmjs.org/:_authToken=\(.*\)$#\1#p' ~/.npmrc)
+
