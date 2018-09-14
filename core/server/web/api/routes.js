@@ -30,9 +30,6 @@ module.exports = function apiRoutes() {
     // ## CORS pre-flight check
     apiRouter.options('*', cors);
 
-    apiRouter.use(auth.session.safeGetSession);
-    apiRouter.use(auth.session.getUser);
-
     // ## Configuration
     apiRouter.get('/configuration', api.http(api.configuration.read));
     apiRouter.get('/configuration/:key', mw.authenticatePrivate, api.http(api.configuration.read));
@@ -171,11 +168,11 @@ module.exports = function apiRoutes() {
     apiRouter.put('/authentication/setup', mw.authenticatePrivate, api.http(api.authentication.updateSetup));
     apiRouter.get('/authentication/setup', api.http(api.authentication.isSetup));
 
-    apiRouter.post('/session', auth.session.createSession);
-    apiRouter.get('/session', auth.session.ensureUser, function (req, res) {
+    apiRouter.post('/session', auth.session.getSession, auth.session.createSession);
+    apiRouter.get('/session', auth.auth.adminAPI, function (req, res) {
         return res.json(Object.assign({}, req.user.toJSON(), req.session));
     });
-    apiRouter.del('/session', auth.session.destroySession);
+    apiRouter.del('/session', auth.auth.adminAPI, auth.session.destroySession);
 
     apiRouter.post('/authentication/token',
         mw.authenticateClient(),
