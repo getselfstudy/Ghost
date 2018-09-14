@@ -1,4 +1,5 @@
 var labs = require('../labs'),
+    session = require('./session'),
     common = require('../../lib/common'),
     authorize;
 
@@ -35,6 +36,14 @@ authorize = {
 
             return next();
         };
+    },
+
+    authorizeAdminAPI: [function (req, res, next) {
+        next();
+    }, session.ensureUser],
+
+    authorizeContentAPI: (req, res, next) => {
+        next();
     }
 };
 
