@@ -8,6 +8,9 @@
 
 require('./core/server/overrides');
 
+require('dotenv').config();
+require('./boot').rewrite();
+
 var config = require('./core/server/config'),
     urlService = require('./core/server/services/url'),
     _ = require('lodash'),

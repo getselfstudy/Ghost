@@ -48,6 +48,7 @@
     "cors": "2.8.4",
     "csv-parser": "1.12.1",
     "downsize": "0.0.8",
+    "ember-mobiledoc-dom-renderer": "^0.6.0",
     "express": "4.16.3",
     "express-brute": "1.0.1",
     "express-hbs": "1.0.4",
@@ -103,6 +104,7 @@
     "sqlite3": "4.0.1"
   },
   "devDependencies": {
+    "dotenv": "^6.0.0",
     "eslint": "4.19.1",
     "eslint-plugin-ghost": "0.0.27",
     "grunt": "1.0.3",
