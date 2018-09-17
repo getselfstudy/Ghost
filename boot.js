@@ -16,6 +16,20 @@ function rewrite() {
     process.env.mail__options__port = process.env.SPARKPOST_SMTP_PORT;
     process.env.mail__options__user = process.env.SPARKPOST_SMTP_USERNAME;
     process.env.mail__options__password = process.env.SPARKPOST_SMTP_PASSWORD;
+
+    process.env.storage__active = "cloudinary";
+    process.env.storage__cloudinary__userDatedFolder = '';
+    process.env.storage__cloudinary__auth__cloud_name = process.env.CLOUDINARY_NAME;
+    process.env.storage__cloudinary__auth__api_key = process.env.CLOUDINARY_KEY;
+    process.env.storage__cloudinary__auth__api_secret = process.env.CLOUDINARY_SECRET;
+    process.env.storage__cloudinary__upload__use_filename = 'true';
+    process.env.storage__cloudinary__upload__unique_filename = '';
+    process.env.storage__cloudinary__upload__overwrite = '';
+    process.env.storage__cloudinary__upload__folder = process.env.CLOUDINARY_FOLDER;
+    process.env.storage__cloudinary__upload__tags = process.env.CLOUDINARY_TAGS || process.env.CLOUDINARY_FOLDER;
+    process.env.storage__cloudinary__fetch__quality = "auto";
+    process.env.storage__cloudinary__fetch__secure = "true";
+    process.env.storage__cloudinary__fetch__cdn_subdomain = "true";
 }
 
 function run() {

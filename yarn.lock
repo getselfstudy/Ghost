@@ -1416,6 +1416,13 @@ clone@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.1.tgz#d217d1e961118e3ac9a4b8bba3285553bf647cdb"
 
+cloudinary@~1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.11.0.tgz#3f6b21961d17859f271738f452427d9899591ff1"
+  dependencies:
+    lodash "^4.17.4"
+    q "^1.5.1"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -2803,7 +2810,7 @@ ghost-ignition@2.9.2:
     prettyjson "^1.1.3"
     uuid "^3.0.0"
 
-ghost-ignition@2.9.4:
+ghost-ignition@2.9.4, ghost-ignition@^2.9.2:
   version "2.9.4"
   resolved "https://registry.yarnpkg.com/ghost-ignition/-/ghost-ignition-2.9.4.tgz#068359a3d5b98f43666e42220afc8a61ccb1e85e"
   dependencies:
@@ -2820,11 +2827,28 @@ ghost-ignition@2.9.4:
     prettyjson "^1.1.3"
     uuid "^3.0.0"
 
+ghost-storage-base@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ghost-storage-base/-/ghost-storage-base-0.0.2.tgz#d98176370b62c2f3422f8f14e1f7afb808a61f22"
+  dependencies:
+    moment "^2.19.3"
+
 ghost-storage-base@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/ghost-storage-base/-/ghost-storage-base-0.0.3.tgz#854b23f67816c16827a6e25b7e51915e236f691d"
   dependencies:
     moment "^2.19.3"
+
+ghost-storage-cloudinary@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ghost-storage-cloudinary/-/ghost-storage-cloudinary-1.1.2.tgz#1904f56a3cd1d9251e8b678f7b00654877bad121"
+  dependencies:
+    bluebird "3.5.1"
+    cloudinary "~1.11.0"
+    ghost-ignition "^2.9.2"
+    ghost-storage-base "0.0.2"
+    image-size "^0.6.2"
+    lodash "^4.17.10"
 
 github-from-package@0.0.0:
   version "0.0.0"
@@ -3481,7 +3505,7 @@ image-size@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.1.tgz#98122a562d59dcc097ef1b2c8191866eb8f5d663"
 
-image-size@0.6.3:
+image-size@0.6.3, image-size@^0.6.2:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
 
@@ -5654,7 +5678,7 @@ pygmentize-bundled@~2.1.0:
     readable-stream "~1.0.17"
     through2 "~0.2.1"
 
-q@^1.1.2:
+q@^1.1.2, q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 

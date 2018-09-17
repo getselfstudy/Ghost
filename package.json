@@ -1,6 +1,6 @@
 {
   "name": "@getselfstudy/ghost",
-  "version": "2.1.2.1",
+  "version": "2.1.2-1",
   "description": "The professional publishing platform",
   "author": "Ghost Foundation",
   "homepage": "https://ghost.org",
@@ -58,6 +58,7 @@
     "ghost-gql": "0.0.10",
     "ghost-ignition": "2.9.6",
     "ghost-storage-base": "0.0.3",
+    "ghost-storage-cloudinary": "^1.1.2",
     "glob": "5.0.15",
     "got": "7.1.0",
     "gscan": "2.2.1",
