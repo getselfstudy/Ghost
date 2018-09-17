@@ -77,4 +77,7 @@ CHANGELOG.md
 # Coverage reports
 coverage.html
 
+# Selfstudy related
 .env*
+.key.json
+
