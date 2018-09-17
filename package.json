@@ -29,6 +29,7 @@
     "cli": "^1.9.0"
   },
   "dependencies": {
+    "@getselfstudy/ghost-google-cloud-storage": "^1.1.2",
     "@nexes/nql": "0.1.0",
     "amperize": "0.3.7",
     "analytics-node": "2.4.1",
@@ -55,7 +56,6 @@
     "express-query-boolean": "2.0.0",
     "extract-zip": "1.6.7",
     "fs-extra": "3.0.1",
-    "ghost-google-cloud-storage": "^1.1.2",
     "ghost-gql": "0.0.10",
     "ghost-ignition": "2.9.6",
     "ghost-storage-base": "0.0.3",
