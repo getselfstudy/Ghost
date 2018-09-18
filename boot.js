@@ -19,12 +19,12 @@ function rewrite() {
     process.env.mail__options__user = process.env.SPARKPOST_SMTP_USERNAME;
     process.env.mail__options__password = process.env.SPARKPOST_SMTP_PASSWORD;
 
-    const { project_id } = JSON.parse(process.env.GS_KEY);
+    const key = JSON.parse(process.env.GS_KEY);
     const keyFile = path.resolve(__dirname, './.key.json');
     fs.writeFileSync(keyFile, process.env.GS_KEY);
 
     process.env.storage__active = 'gcloud';
-    process.env.storage__gcloud__projectId = project_id;
+    process.env.storage__gcloud__projectId = key.project_id;
     process.env.storage__gcloud__key = keyFile;
     process.env.storage__gcloud__bucket = process.env.GS_BUCKET;
     process.env.storage__gcloud__assetDomain = process.env.GS_DOMAIN || process.env.GS_BUCKET;
