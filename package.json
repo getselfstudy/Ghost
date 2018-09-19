@@ -1,6 +1,6 @@
 {
   "name": "@getselfstudy/ghost",
-  "version": "2.1.2-6",
+  "version": "2.1.2-7",
   "description": "The professional publishing platform",
   "author": "Ghost Foundation",
   "homepage": "https://ghost.org",
@@ -22,7 +22,8 @@
     "dev": "DEBUG=ghost:* grunt dev",
     "test": "grunt validate --verbose",
     "setup": "yarn install && knex-migrator init && grunt symlink && grunt init || true",
-    "lint": "grunt lint"
+    "lint": "grunt lint",
+    "postinstall": "cd content/themes/casper && yarn install && npm run build"
   },
   "engines": {
     "node": "^6.9.0 || ^8.9.0",
