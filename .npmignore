@@ -24,6 +24,9 @@ node_modules/**
 .groc*
 .jshintrc
 .jscsrc
+.env*
+.vscode
+.key.json
 *.iml
 config.js
 core/built/**/*.map
@@ -42,3 +45,4 @@ bower_components/**
 gulpfile.js
 !content/themes/casper/gulpfile.js
 package-lock.json
+activate
