@@ -44,5 +44,6 @@ bower_components/**
 .editorconfig
 gulpfile.js
 !content/themes/casper/gulpfile.js
+!content/themes/casper/**/*.html
 package-lock.json
 activate
