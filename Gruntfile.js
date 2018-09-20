@@ -366,7 +366,7 @@ var config = require('./core/server/config'),
 
                 prod: {
                     'core/client': 'shell:ember:prod',
-                    'content/themes/casper': 'shell:npm-prod'
+                    'content/themes/casper': 'npm-prod'
                 },
 
                 watch: {
