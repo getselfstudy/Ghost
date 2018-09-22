@@ -74,6 +74,22 @@ module.exports = function setupSiteApp(options = {}) {
     siteApp.use(themeMiddleware);
     debug('Themes done');
 
+    // if (process.env.THEME_PROXY) {
+    //     const items = process.env.THEME_PROXY.split(',');
+    //     const regEx = new RegExp(items[0]);
+    //     const mt = require('http-proxy-middleware');
+    //     const proxy = mt({
+    //         target: items[1],
+    //         changeOrigin: true
+    //     });
+    //     siteApp.use((req, res, next) => {
+    //         if (regEx.test(req.path)) {
+    //             return proxy(req, res, next);
+    //         }
+    //         next();
+    //     });
+    // }
+
     // Theme static assets/files
     siteApp.use(shared.middlewares.staticTheme());
     debug('Static content done');

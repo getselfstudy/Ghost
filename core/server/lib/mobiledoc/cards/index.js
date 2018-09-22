@@ -7,5 +7,5 @@ module.exports = [
     require('./image'),
     require('./markdown'),
     require('./gallery'),
-    require('./selfstudy-section')
+    require('./selfstudy-activity')
 ];
