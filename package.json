@@ -1,6 +1,6 @@
 {
   "name": "@getselfstudy/ghost",
-  "version": "2.1.2-19",
+  "version": "2.1.2-20",
   "description": "The professional publishing platform",
   "author": "Ghost Foundation",
   "homepage": "https://ghost.org",
@@ -19,7 +19,8 @@
   "main": "./core/index",
   "scripts": {
     "start": "node boot",
-    "dev": "DEBUG=ghost:* grunt dev",
+    "dev": "THEME_PROXY=/assets/components,http://localhost:3000 DEBUG=ghost:* concurrently \"npm run capser-dev\" \"grunt dev\"",
+    "capser-dev": "cd content/themes/casper && npm run dev",
     "test": "grunt validate --verbose",
     "setup": "yarn install && knex-migrator init && grunt symlink && grunt init || true",
     "lint": "grunt lint"
@@ -106,6 +107,7 @@
     "sqlite3": "4.0.1"
   },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "dotenv": "^6.0.0",
     "eslint": "4.19.1",
     "eslint-plugin-ghost": "0.0.27",
