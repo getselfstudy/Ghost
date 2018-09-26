@@ -19,7 +19,7 @@
   "main": "./core/index",
   "scripts": {
     "start": "node boot",
-    "dev": "THEME_PROXY=/assets/components,http://localhost:3000 DEBUG=ghost:* concurrently \"npm run capser-dev\" \"grunt dev\"",
+    "dev": "THEME_PROXY=/assets/components,http://localhost:3000 DEBUG=${DEBUG:-ghost:*} concurrently \"npm run capser-dev\" \"grunt dev\"",
     "capser-dev": "cd content/themes/casper && npm run dev",
     "test": "grunt validate --verbose",
     "setup": "yarn install && knex-migrator init && grunt symlink && grunt init || true",
