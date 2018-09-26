@@ -1,0 +1,25 @@
+routes:
+  /units/:
+    controller: channel
+    filter: tag:unit
+    template: units
+    order: slug
+
+collections:
+  /unit/:
+    permalink: /unit/{slug}/
+    filter: tag:unit
+    type: custom
+    frontPageTemplate: units
+    template:
+      - unit
+
+  /:
+    permalink: /posts/{slug}/
+    filter: tag:-[article,unit,activity]
+    template:
+      - index
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
