@@ -1,6 +1,6 @@
 {
   "name": "@getselfstudy/ghost",
-  "version": "2.1.2-20",
+  "version": "2.1.2-21",
   "description": "The professional publishing platform",
   "author": "Ghost Foundation",
   "homepage": "https://ghost.org",
@@ -23,7 +23,8 @@
     "capser-dev": "cd content/themes/casper && npm run dev",
     "test": "grunt validate --verbose",
     "setup": "yarn install && knex-migrator init && grunt symlink && grunt init || true",
-    "lint": "grunt lint"
+    "lint": "grunt lint",
+    "nvm": "~/.nvm/nvm-exec which node | xargs -J % ln -sf % ./.nvm-node && chmod +x ./.nvm-node"
   },
   "engines": {
     "node": "^6.9.0 || ^8.9.0",

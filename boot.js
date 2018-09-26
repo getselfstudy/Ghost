@@ -49,6 +49,8 @@ function rewrite() {
 function run() {
     require('dotenv').config();
 
+    rewrite();
+    
     require('./index.js');
 }
 

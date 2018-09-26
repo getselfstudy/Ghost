@@ -8,7 +8,15 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/index"
+            "program": "${workspaceFolder}/boot",
+            "runtimeExecutable": "${workspaceRoot}/.nvm-node",
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "THEME_PROXY": "/assets/components,http://localhost:3000",
+                "DEBUG": "ghost:*"
+            }
         }
     ]
 }
